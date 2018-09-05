@@ -5,13 +5,15 @@ filetype off                  " requiredi
 let mapleader = " "
 " Allows copy and pasting between vim and system
 set clipboard+=unnamed,unnamedplus
-
+set spell
+set spelllang=en
 " Editor Appearance
 set number
 set list listchars=tab:»·,trail:·,nbsp:·,eol:¬
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set backspace=indent,eol,start
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -24,21 +26,23 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Theme
 Plugin 'joshdick/onedark.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/tComment'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " Language-specific packages
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 " Plugin 'terryma/vim-multiple-cursors'
 Plugin 'pbrisbin/vim-mkdir'
-
-Plugin 'christoomey/vim-run-interactive'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/goyo.vim'
+Plugin 'tpope/vim-obsession'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -113,5 +117,4 @@ nnoremap <leader>e :call FzyCommand("ag . --silent -l -g ''", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("ag . --silent -l -g ''", ":vs")<cr>
 nnoremap <leader>s :call FzyCommand("ag . --silent -l -g ''", ":sp")<cr>
 
-map <Meta-w> :w<cr>
-
+let g:strip_whitespace_on_save=1
