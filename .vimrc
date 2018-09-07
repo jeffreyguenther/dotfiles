@@ -1,5 +1,5 @@
 set nocompatible              " be iMproved, required
-filetype off                  " requiredi
+filetype off                  " required
 
 " Leader
 let mapleader = " "
@@ -26,7 +26,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Theme
 Plugin 'joshdick/onedark.vim'
-" Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/tComment'
@@ -38,7 +37,6 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Language-specific packages
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
-" Plugin 'terryma/vim-multiple-cursors'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/goyo.vim'
@@ -47,27 +45,26 @@ Plugin 'tpope/vim-obsession'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 " Theme settings
 syntax on
 set background=dark
 colorscheme onedark
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
-endif
+highlight LineNr ctermfg=grey
 
 " Quicker window movement
 nnoremap <C-j> <C-w>j
@@ -99,7 +96,6 @@ augroup END
 let g:gitgutter_terminal_reports_focus=0
 map <C-n> :NERDTreeToggle<CR>
 
-set rtp+=/usr/local/opt/fzf
 function! FzyCommand(choice_command, vim_command)
   try
     let output = system(a:choice_command . " | fzy ")
@@ -112,9 +108,9 @@ function! FzyCommand(choice_command, vim_command)
   endif
 endfunction
 
-nnoremap <C-p> :call FzyCommand("ag . --silent -l -g ''", ":vs")<cr>
-nnoremap <leader>e :call FzyCommand("ag . --silent -l -g ''", ":e")<cr>
-nnoremap <leader>v :call FzyCommand("ag . --silent -l -g ''", ":vs")<cr>
-nnoremap <leader>s :call FzyCommand("ag . --silent -l -g ''", ":sp")<cr>
+nnoremap <C-p> :call FzyCommand("rg --files", ":vs")<cr>
+nnoremap <leader>e :call FzyCommand("rg --files", ":e")<cr>
+nnoremap <leader>v :call FzyCommand("rg --files", ":vs")<cr>
+nnoremap <leader>s :call FzyCommand("rg --files", ":sp")<cr>
 
 let g:strip_whitespace_on_save=1
