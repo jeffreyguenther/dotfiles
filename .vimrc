@@ -231,9 +231,5 @@ nmap <silent> <leader>g :TestVisit<CR>
 set t_Co=256
 set background=dark
 
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 colorscheme seti
 
