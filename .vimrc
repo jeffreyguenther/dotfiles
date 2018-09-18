@@ -1,101 +1,128 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+""""""""""""""""""""""""""""""""""""""""
+" Jeffrey Guenther Vimrc configuration
+""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+syntax on
+set nowrap
+set encoding=utf8
 set noswapfile
 
-" Leader
-let mapleader = " "
-" Allows copy and pasting between vim and system
+" Allow copy and pasting between vim and OS
 set clipboard+=unnamed,unnamedplus
-set spell
-set spelllang=en
-" Editor Appearance
-set number
-set list listchars=tab:»·,trail:·,nbsp:·,eol:¬
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set backspace=indent,eol,start
+
+""" START Vundle Configuration
+
+" Disable file type for vundle
+filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, require
 Plugin 'VundleVim/Vundle.vim'
 
-" Theme
-Plugin 'joshdick/onedark.vim'
-
+" Editor
 Plugin 'scrooloose/nerdtree'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'derekprior/vim-leaders'
+Plugin 'derekprior/vim-trimmer'
+Plugin 'pbrisbin/vim-mkdir'
+Plugin 'tpope/vim-rsi'
 Plugin 'vim-scripts/tComment'
-Plugin 'tpope/vim-surround'
+
+" Language Utilities
+Plugin 'w0rp/ale'
+Plugin 'Townk/vim-autoclose'
+Plugin 'tpope/vim-endwise'
+Plugin 'andrewradev/splitjoin.vim'
+Plugin 'janko-m/vim-test'
+
+" Snippets
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+" Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'ntpeters/vim-better-whitespace'
 
-" Language-specific packages
+" Ruby
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'pbrisbin/vim-mkdir'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'junegunn/goyo.vim'
-Plugin 'tpope/vim-obsession'
-" All of your Plugins must be added before the following line
+
+" Javascript
+Plugin 'pangloss/vim-javascript'
+
+" Markdown / Writing
+Plugin 'tpope/vim-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'LanguageTool'
+
+" Theme
+Plugin 'trusktr/seti.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
+"""" END Vundle Configuration
 
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
-" Theme settings
-syntax on
-set background=dark
-colorscheme onedark
-highlight LineNr ctermfg=grey
+"""""""""""""""""""""""""""""""""""""
+" Configuration Section
+"""""""""""""""""""""""""""""""""""""
 
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Set Leader
+let mapleader = " "
 
-" Autocomplete with dictionary words when spell check is on
-set complete+=kspell
+" Show linenumbers
+set number
+set ruler
 
-" Move the search windo to the top of the screen
-" let g:ctrlp_match_window_bottom = 0
-" let g:ctrlp_match_window_reversed =0
+" Turn on syntax highlighting allowing local overrides
+syntax enable
 
-set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
+" Enable highlighting of the current line
+set cursorline
+$
+" Whitespace
+set nowrap                        " don't wrap lines
+set tabstop=2                     " a tab is two spaces
+set shiftwidth=2                  " an autoindent (with <<) is two spaces
+set expandtab                     " use spaces, not tabs
+set list                          " Show invisible characters
+set backspace=indent,eol,start    " backspace through everything in insert mode
 
-" Adjust the cursor
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+" List chars
+set listchars=""                  " Reset the listchars
+set listchars=tab:».               " a tab should display as "", trailing whitespace as "."
+set listchars+=trail:.            " show trailing spaces as dots
+set listchars+=extends:>          " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+set listchars+=precedes:<         " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the left of the screen
 
-" optional reset cursor on start:
-augroup myCmds
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
-augroup END
+" Searching
+set hlsearch    " highlight matches
+set incsearch   " incremental searching
+set ignorecase  " searches are case insensitive...
+set smartcase   " ... unless they contain at least one capital letter
 
-let g:gitgutter_terminal_reports_focus=0
-map <C-n> :NERDTreeToggle<CR>
+" Disable output and VCS files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" Disable archive files
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
+" Ignore bundler and sass cache
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+
+" Ignore librarian-chef, vagrant, test-kitchen and Berkshelf cache
+set wildignore+=*/tmp/librarian/*,*/.vagrant/*,*/.kitchen/*,*/vendor/cookbooks/*
+
+" Ignore rails temporary asset caches
+set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*
+
+" Disable temp and backup files
+set wildignore+=*.swp,*~,._*
 
 function! FzyCommand(choice_command, vim_command)
   try
@@ -109,45 +136,100 @@ function! FzyCommand(choice_command, vim_command)
   endif
 endfunction
 
-nnoremap <C-p> :call FzyCommand("rg --files", ":vs")<cr>
+nnoremap <C-p> :call FzyCommand("rg --files", ":e")<cr>
 nnoremap <leader>e :call FzyCommand("rg --files", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("rg --files", ":vs")<cr>
+nnoremap <leader>s :call FzyCommand("rg --files", ":sp")<cr>
 
-function! RgFzyGlobSearch(vim_command)
-  try
-    let rg_command = "rg .
-          \ --line-number
-          \ --column
-          \ --no-heading
-          \ --fixed-strings
-          \ --ignore-case
-          \ --hidden
-          \ --follow
-          \ --glob '!{.git,node_modules}'"
-    " Right now, this function requires rg to print path:line#:column# so awk can replace the output.
-    let filename_and_location = system(rg_command . " | fzy | awk -F ':' '{print $1 \"\|\" $2 \"\|\" $3}' ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(filename_and_location)
-    let output = split(filename_and_location, '|')
-    execute a:vim_command . ' ' . output[0]
-    call cursor(output[1], output[2])
+" With support for autocmd
+if has("autocmd")
+  " Save buffer when it loses focus
+  if exists("g:autosave_on_blur")
+    au FocusLost * silent! wall
   endif
-endfunction
 
-nnoremap <leader>re :call RgFzyGlobSearch(':e')<cr>
-nnoremap <leader>rv :call RgFzyGlobSearch(':vs')<cr>noremap <leader>s :call FzyCommand("rg --files", ":sp")<cr>
+  " Make sure all mardown files have the correct filetype set and setup wrapping
+  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+  if !exists("g:disable_markdown_autostyle")
+    au FileType markdown setlocal wrap linebreak textwidth=72 nolist
+  endif
 
-let g:strip_whitespace_on_save=1
+  " Remember last location in file, but not for commit messages.
+  " see :help last-position-jump
+  au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g`\"" | endif
+endif
 
-function! RSpecCommand(lines)
-  let cmd = "! bundle exec rspec " . expand('%') .":" . a:lines
-  echom cmd
-  exec cmd
-endfunction
+" General Mappings (Normal, Visual, Operator-pending)
+" format the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
 
-command! -nargs=1 RSpec :call RSpecCommand(<args>)
-nnoremap <leader>t :! bundle exec rspec %<cr>
-nnoremap <leader>ft :execute "RSpec " . line('.')<cr>
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
+" set text wrapping toggles
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+
+" find merge conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
+
+" Map the arrow keys to be based on display lines, not physical lines
+map <Down> gj
+map <Up> gk
+
+" Toggle hlsearch with <leader>hs
+nmap <leader>hs :set hlsearch! hlsearch?<CR>
+
+" Toggle relative line numbers
+nmap <leader>ln :set relativenumber! relativenumber?<CR>
+
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Toggle NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Manage vimrc
+" Edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Writing Settidgs
+" This is the path if installed via brew
+let g:languagetool_jar  = '/usr/local/Cellar/languagetool/4.2/libexec/languagetool-commandline.jar'
+
+" Use github flavoured markedown by default
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
+" Vim-Test Mappings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+" Theme and Styling
+set t_Co=256
+set background=dark
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+colorscheme seti
+
