@@ -22,6 +22,10 @@ call vundle#begin()
 " let Vundle manage Vundle, require
 Plugin 'VundleVim/Vundle.vim'
 
+" tmux integration
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-obsession'
+
 " Editor
 Plugin 'scrooloose/nerdtree'
 Plugin 'ryanoasis/vim-devicons'
