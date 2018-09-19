@@ -299,3 +299,5 @@ unbind C-a
 # moving between windows with Alt-Left/Alt-Right
 bind -n M-Left previous-window
 bind -n M-Right next-window
+
+run-shell ~/.tmux-resurrect/resurrect.tmux
