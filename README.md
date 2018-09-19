@@ -28,7 +28,6 @@ environment.
 * Install SSH key
   * :warning: Don't forget to set the permissions of the key to 600
 * Update .zshrc to load keyfile
-* Install Grammarly plugin
 
 ## Keyboard
 If using a mechanical keyboard, remap <key>alt</key> to <key>meta</key>
