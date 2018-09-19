@@ -100,9 +100,9 @@ set listchars=""                  " Reset the listchars
 set listchars=tab:».               " a tab should display as "", trailing whitespace as "."
 set listchars+=trail:.            " show trailing spaces as dots
 set listchars+=extends:>          " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the right of the screen
+" off and the line continues beyond the right of the screen
 set listchars+=precedes:<         " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the left of the screen
+" off and the line continues beyond the left of the screen
 
 " Searching
 set hlsearch    " highlight matches
@@ -128,6 +128,7 @@ set wildignore+=*/tmp/cache/assets/*/sprockets/*,*/tmp/cache/assets/*/sass/*
 " Disable temp and backup files
 set wildignore+=*.swp,*~,._*
 
+" Fuzzy file lookup
 function! FzyCommand(choice_command, vim_command)
   try
     let output = system(a:choice_command . " | fzy ")
@@ -145,6 +146,34 @@ nnoremap <leader>e :call FzyCommand("rg --files", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("rg --files", ":vs")<cr>
 nnoremap <leader>s :call FzyCommand("rg --files", ":sp")<cr>
 
+" Fuzzy search in current directory
+function! RgFzyGlobSearch(vim_command)
+  try
+    let rg_command = "rg .
+          \ --line-number
+          \ --column
+          \ --no-heading
+          \ --fixed-strings
+          \ --ignore-case
+          \ --hidden
+          \ --follow
+          \ --glob '!{.git,node_modules}'"
+    " Right now, this function requires rg to print path:line#:column# so awk can replace the output.
+    let filename_and_location = system(rg_command . " | fzy | awk -F ':' '{print $1 \"\|\" $2 \"\|\" $3}' ")
+  catch /Vim:Interrupt/
+    " Swallow errors from ^C, allow redraw! below
+  endtry
+  redraw!
+  if v:shell_error == 0 && !empty(filename_and_location)
+    let output = split(filename_and_location, '|')
+    execute a:vim_command . ' ' . output[0]
+    call cursor(output[1], output[2])
+  endif
+endfunction
+
+nnoremap <leader>re :call RgFzyGlobSearch(':e')<cr>
+nnoremap <leader>rv :call RgFzyGlobSearch(':vs')<cr>
+
 " With support for autocmd
 if has("autocmd")
   " Save buffer when it loses focus
@@ -161,7 +190,7 @@ if has("autocmd")
   " Remember last location in file, but not for commit messages.
   " see :help last-position-jump
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"" | endif
+        \| exe "normal! g`\"" | endif
 endif
 
 " General Mappings (Normal, Visual, Operator-pending)
@@ -216,8 +245,8 @@ let g:languagetool_jar  = '/usr/local/Cellar/languagetool/4.2/libexec/languageto
 
 " Use github flavoured markedown by default
 augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
 " Vim-Test Mappings
