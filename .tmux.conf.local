@@ -292,3 +292,7 @@ tmux_conf_copy_to_os_clipboard=true
 
 # move status line to top
 #set -g status-position top
+
+# moving between windows with Alt-Left/Alt-Right
+bind -n M-Left previous-window
+bind -n M-Right next-window
