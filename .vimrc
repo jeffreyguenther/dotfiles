@@ -41,7 +41,7 @@ Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-endwise'
 Plugin 'andrewradev/splitjoin.vim'
 Plugin 'janko-m/vim-test'
-
+Plugin 'sheerun/vim-polyglot'
 " Snippets
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -62,6 +62,9 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-markdown'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'LanguageTool'
+
+" HTML
+Plugin 'mattn/emmet-vim'
 
 " Theme
 Plugin 'trusktr/seti.vim'
