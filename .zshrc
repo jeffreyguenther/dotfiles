@@ -94,3 +94,5 @@ export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+alias rm="trash"
