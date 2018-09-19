@@ -65,7 +65,7 @@ Plugin 'LanguageTool'
 
 " HTML
 Plugin 'mattn/emmet-vim'
-
+Plugin 'Valloric/MatchTagAlways'
 " Theme
 Plugin 'trusktr/seti.vim'
 
