@@ -29,5 +29,9 @@ environment.
   * :warning: Don't forget to set the permissions of the key to 600
 * Update .zshrc to load keyfile
 
+* Install tmux-ressurrect into `.tmux-resurrect`
+* Install oh my tmux and symlink the `.tmux.conf.local` to my home
+  directory
+
 ## Keyboard
 If using a mechanical keyboard, remap <key>alt</key> to <key>meta</key>
