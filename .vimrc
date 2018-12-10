@@ -33,7 +33,9 @@ Plugin 'derekprior/vim-leaders'
 Plugin 'derekprior/vim-trimmer'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'tpope/vim-rsi'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/tComment'
+Plugin 'gevann/vim-rg'
 
 " Language Utilities
 Plugin 'w0rp/ale'
@@ -88,8 +90,8 @@ set ruler
 syntax enable
 
 " Enable highlighting of the current line
-set cursorline
-$
+" set cursorline
+
 " Whitespace
 set nowrap                        " don't wrap lines
 set tabstop=2                     " a tab is two spaces
@@ -258,6 +260,10 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" Save
+nnoremap <leader>s :w<cr>
+nnoremap <leader>w :w<cr>
 
 " Theme and Styling
 set t_Co=256
