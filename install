@@ -1,0 +1,25 @@
+#!/bin/sh
+
+DOT_FILES=$HOME/.dotfiles
+
+brew bundle --fitle $DOT_FILES/Brewfile
+rcup -f -d "$DOTFILES"
+
+echo "Install SF Mono"
+cd /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/
+cp *.otf ~/Library/Fonts/
+cd $HOME
+
+echo "Install oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+asdf plugin-add erlang
+asdf plugin-add elixir
+asdf plugin-add nodejs
+asdf plugin-add ruby
+asdf install
+
+echo "Install vundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+

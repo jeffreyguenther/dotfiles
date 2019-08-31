@@ -1,37 +1,17 @@
 # dotfiles
 
-There are my dotfiles and instructions on how to rebuild my development
-environment.
+Here are my dotfiles and how I setup my dev environment.
 
-## Setting Up Dev environment
+## Bootstrap Script
 
-* Install brew
-* Install git
-* Setup git username
-* Install iTerm
-* Load iTerm colors and terminal font.
-  - 12pt [Source Code Pro for Powerline](https://github.com/powerline/fonts/tree/master/SourceCodePro)
-* Install zsh
-* Setup .zshrc
-* Install powerline
-* Install trash
-* Install rbenv
-* Install rbenv default gems
-  * Add bundler
-  * Add foreman
-* Install latest ruby
-* Update rubygems
-* Install postgres
-* Install redis
-* Start these as services via brew
-* Install JVM
-* Install SSH key
-  * :warning: Don't forget to set the permissions of the key to 600
-* Update .zshrc to load keyfile
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install git
+git clone git@github.com:jeffreyguenther/dotfiles.git .dotfiles
+~/.dotfiles/install
+```
 
-* Install tmux-ressurrect into `.tmux-resurrect`
-* Install oh my tmux and symlink the `.tmux.conf.local` to my home
-  directory
+## Manual Stuff
 
-## Keyboard
-If using a mechanical keyboard, remap <key>alt</key> to <key>meta</key>
+Install iTerm2 color themes from https://github.com/kaicataldo/material.vim/tree/master/terminal-colors/iterm2
+Install iTerm2 profile

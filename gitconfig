@@ -1,0 +1,9 @@
+[user]
+	name = Jeffrey Guenther
+	email = guenther.jeffrey@gmail.com
+[rebase]
+	autosquash = true
+[color]
+	ui = true
+[alias]
+	diffs = diff --cached

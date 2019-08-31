@@ -1,0 +1,5 @@
+# Ruby/Rails
+alias be='bundle exec'
+alias ber='bundle exec rspec'
+alias bec='bundle exec rails console'
+alias bes='bundle exec rails server'
