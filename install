@@ -2,7 +2,7 @@
 
 DOT_FILES=$HOME/.dotfiles
 
-brew bundle --fitle $DOT_FILES/Brewfile
+brew bundle --file=$DOT_FILES/Brewfile
 rcup -f -d "$DOTFILES"
 
 echo "Install SF Mono"
