@@ -1,1 +1,1 @@
-EXCLUDES="Brewfile README.md install com.googlecode.iterm2.plist"
+EXCLUDES="Brewfile README.md install com.googlecode.iterm2.plist material-dark.itermcolors"
