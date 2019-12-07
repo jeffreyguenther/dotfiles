@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -1998,7 +2000,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>842 605 928 394 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>61 929 730 488 0 0 2560 1417 </string>
+	<string>436 164 2053 1253 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>754 73 1465 1300 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -2837,7 +2839,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>865C55CC-0B40-4FAC-AB57-E08B31EC10E6</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>7</integer>
+	<integer>10</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>587694289.72251701</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -3602,7 +3608,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-31T01:03:54Z</date>
+	<date>2019-09-18T16:26:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
