@@ -43,9 +43,7 @@ tmux_conf_new_session_prompt=false
 #  - true
 #  - false (default)
 tmux_conf_theme_24b_colour=false
-
-# window style
-tmux_conf_theme_window_fg='default'
+# window style tmux_conf_theme_window_fg='default'
 tmux_conf_theme_window_bg='default'
 
 # highlight focused pane (tmux >= 2.1), possible values are:
@@ -60,7 +58,7 @@ tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
 # pane border style, possible values are:
 #   - thin (default)
 #   - fat
-tmux_conf_theme_pane_border_style=thin
+tmux_conf_theme_pane_border_style=fat
 
 # pane borders colours:
 tmux_conf_theme_pane_border='#444444'                   # gray
@@ -300,4 +298,10 @@ unbind C-a
 bind -n M-Left previous-window
 bind -n M-Right next-window
 set-option -s escape-time 10
-run-shell ~/.tmux-resurrect/resurrect.tmux
+
+set -g @tpm_plugins ' \
+  tmux-plugins/tpm \
+  tmux-plugins/tmux-resurrect \
+'
+
+run -b '~/.tmux/plugins/tpm/tpm'
